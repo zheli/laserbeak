@@ -1,0 +1,2 @@
+[console_scripts]
+bird = bird.cli:app
