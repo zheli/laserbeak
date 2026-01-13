@@ -1,5 +1,5 @@
 [project]
-name = "bird"
+name = "laserbeak"
 version = "0.6.0"
 description = "CLI tool for tweeting and replying via Twitter/X GraphQL API"
 readme = "README.md"
@@ -22,14 +22,14 @@ build-backend = "setuptools.build_meta"
 package-dir = {"" = "src"}
 
 [tool.setuptools.package-data]
-bird = ["data/*.json", "py.typed"]
+laserbeak = ["data/*.json", "py.typed"]
 
 [project.scripts]
-bird = "bird.cli:app"
+laserbeak = "laserbeak.cli:app"
 
 [project.urls]
-Homepage = "https://github.com/steipete/bird"
-Changelog = "https://github.com/steipete/bird/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/zheli/laserbeak"
+Changelog = "https://github.com/zheli/laserbeak/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 dev = [

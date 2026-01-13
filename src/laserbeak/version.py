@@ -5,6 +5,6 @@ from importlib.metadata import PackageNotFoundError, version
 
 def get_cli_version() -> str:
     try:
-        return version("bird")
+        return version("laserbeak")
     except PackageNotFoundError:
         return "0.0.0+dev"

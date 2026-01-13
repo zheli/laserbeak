@@ -15,16 +15,16 @@
 ## 0.5.1 — 2026-01-01
 
 ### Changed
-- `bird --help` now includes explicit “Shortcuts” and “JSON Output” sections (documents `bird <tweet-id-or-url>` shorthand + `--json`).
+- `laserbeak --help` now includes explicit “Shortcuts” and “JSON Output” sections (documents `laserbeak <tweet-id-or-url>` shorthand + `--json`).
 - Release docs now include explicit npm publish verification steps.
 
 ### Fixed
-- `pnpm bird --help` now works (dev script runs the CLI entrypoint, not the library entrypoint).
+- `pnpm laserbeak --help` now works (dev script runs the CLI entrypoint, not the library entrypoint).
 - `following`/`followers` now fall back to internal v1.1 REST endpoints when GraphQL returns `404`.
 
 ### Tests
 - Add root help output regression test.
-- Add opt-in live CLI test suite (real GraphQL calls; skipped by default; gated via `BIRD_LIVE=1`).
+- Add opt-in live CLI test suite (real GraphQL calls; skipped by default; gated via `LASERBEAK_LIVE=1`).
 
 ## 0.5.0 — 2026-01-01
 
@@ -38,7 +38,7 @@
 - Query ID updater now tracks Following/Followers GraphQL operations.
 - Query ID updater now tracks BookmarkFolderTimeline and keeps bookmark query IDs seeded.
 - `following`/`followers` JSON user fields are now camelCase (`followersCount`, `followingCount`, `isBlueVerified`, `profileImageUrl`, `createdAt`).
-- Cookie extraction timeout is now configurable (default 30s on macOS) via `--cookie-timeout` / `BIRD_COOKIE_TIMEOUT_MS` (thanks @tylerseymour).
+- Cookie extraction timeout is now configurable (default 30s on macOS) via `--cookie-timeout` / `LASERBEAK_COOKIE_TIMEOUT_MS` (thanks @tylerseymour).
 - Search now paginates beyond 20 results when using `-n` (thanks @ryanh-ai).
 - Library exports are now separated from the CLI entrypoint for easier embedding.
 
@@ -49,7 +49,7 @@
 - `bookmarks --folder-id` to fetch bookmark folders (thanks @tylerseymour).
 
 ### Changed
-- Cookie extraction now uses `@steipete/sweet-cookie` (drops `sqlite3` CLI + custom browser readers in `bird`).
+- Cookie extraction now uses `@steipete/sweet-cookie` (drops `sqlite3` CLI + custom browser readers in `laserbeak`).
 - Query ID updater now tracks the Bookmarks GraphQL operation.
 - Lint rules stricter (block statements, no-negation-else, useConst/useTemplate, top-level regex, import extension enforcement).
 - `pnpm lint` now runs both Biome and oxlint (type-aware).
@@ -75,7 +75,7 @@
 - Safari cookie extraction (`Cookies.binarycookies`) + `allowSafari` config toggle.
 
 ### Changed
-- Removed the Sweetistics engine + fallback. `bird` is GraphQL-only.
+- Removed the Sweetistics engine + fallback. `laserbeak` is GraphQL-only.
 - Browser cookie fallback order: Safari → Chrome → Firefox.
 
 ### Tests
@@ -85,8 +85,8 @@
 
 ### Added
 - Output controls: `--plain`, `--no-emoji`, `--no-color` (respects `NO_COLOR`).
-- `help` command: `bird help <command>`.
-- Runtime GraphQL query ID refresh: `bird query-ids --fresh` (cached on disk; auto-retry on 404; override cache via `BIRD_QUERY_IDS_CACHE`).
+- `help` command: `laserbeak help <command>`.
+- Runtime GraphQL query ID refresh: `laserbeak query-ids --fresh` (cached on disk; auto-retry on 404; override cache via `LASERBEAK_QUERY_IDS_CACHE`).
 - GraphQL media uploads via `--media` (up to 4 images/GIFs, or 1 video).
 
 ### Fixed
@@ -120,7 +120,7 @@
 - Long-form Notes and Articles extraction for full text output.
 - Thread + reply fetching with full conversation parsing.
 - Search + mentions via GraphQL (latest timeline).
-- JSON5 config files (`~/.config/bird/config.json5`, `./.birdrc.json5`) with engine defaults, profiles, allowChrome/allowFirefox, and timeoutMs.
+- JSON5 config files (`~/.config/laserbeak/config.json5`, `./.birdrc.json5`) with engine defaults, profiles, allowChrome/allowFirefox, and timeoutMs.
 - Request timeouts (`--timeout`, `timeoutMs`) for GraphQL and Sweetistics calls.
 - Bun-compiled standalone binary via `pnpm run build`.
 - Query ID refresh helper: `pnpm run graphql:update`.

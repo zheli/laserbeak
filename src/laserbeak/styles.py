@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-
 ANSI_RESET = "\x1b[0m"
 
 

@@ -44,7 +44,7 @@ class TweetData(TypedDict, total=False):
     likeCount: int
     conversationId: str
     inReplyToStatusId: str
-    quotedTweet: "TweetData"
+    quotedTweet: TweetData
     media: list[TweetMedia]
     _raw: dict
 

@@ -1,4 +1,4 @@
-from bird.extract import extract_bookmark_folder_id, extract_list_id, extract_tweet_id
+from laserbeak.extract import extract_bookmark_folder_id, extract_list_id, extract_tweet_id
 
 
 def test_extract_tweet_id_from_url():

@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 import os
-from typing import Iterable
 
 from .types import TweetData, TweetMedia, TwitterUser
 
@@ -66,7 +65,7 @@ def extract_article_text(result: dict | None) -> str | None:
             "article": article_result,
             "note_tweet": (result or {}).get("note_tweet", {}).get("note_tweet_results", {}).get("result"),
         }
-        print("[bird][debug][article] payload:", json.dumps(payload, indent=2))
+        print("[laserbeak][debug][article] payload:", json.dumps(payload, indent=2))
 
     title = first_text(article_result.get("title"), article.get("title"))
     body = first_text(
@@ -201,7 +200,7 @@ def map_tweet_result(result: dict | None, *, quote_depth: int, include_raw: bool
 
     quoted_tweet: TweetData | None = None
     if quote_depth > 0:
-        quoted_result = unwrap_tweet_result(((result.get("quoted_status_result") or {}).get("result")))
+        quoted_result = unwrap_tweet_result((result.get("quoted_status_result") or {}).get("result"))
         if quoted_result:
             quoted_tweet = map_tweet_result(quoted_result, quote_depth=quote_depth - 1, include_raw=include_raw)
 
@@ -253,7 +252,7 @@ def collect_tweet_results_from_entry(entry: dict) -> list[dict]:
 
     for item in content.get("items") or []:
         push_result((((item.get("item") or {}).get("itemContent") or {}).get("tweet_results") or {}).get("result"))
-        push_result((((item.get("itemContent") or {}).get("tweet_results") or {}).get("result")))
+        push_result(((item.get("itemContent") or {}).get("tweet_results") or {}).get("result"))
         push_result((((item.get("content") or {}).get("itemContent") or {}).get("tweet_results") or {}).get("result"))
 
     return results
