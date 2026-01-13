@@ -11,7 +11,7 @@ import typer
 import click
 from typer.main import get_command
 
-from .config import BirdConfig, load_config
+from .config import LaserbeakConfig, load_config
 from .cookies import resolve_credentials
 from .extract import extract_bookmark_folder_id, extract_list_id, extract_tweet_id
 from .normalize import mentions_query_from_user_option, normalize_handle
@@ -126,7 +126,7 @@ class MediaSpec:
 class CliContext:
     is_tty: bool
     output: object
-    config: BirdConfig
+    config: LaserbeakConfig
 
     def colors(self, *, color: str | None = None, bold: bool = False) -> Callable[[str], str]:
         def wrap(text: str) -> str:
@@ -1041,7 +1041,7 @@ def query_ids_command(
             )
             return
         typer.echo(f"{context.p('warn')}No cached query IDs yet.")
-        typer.echo(f"{context.p('info')}Run: bird query-ids --fresh")
+        typer.echo(f"{context.p('info')}Run: laserbeak query-ids --fresh")
         typer.echo(f"features_path: {feature_snapshot.cachePath}")
         return
 

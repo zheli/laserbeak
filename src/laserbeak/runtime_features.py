@@ -59,10 +59,10 @@ def _to_feature_overrides(overrides: dict) -> dict:
 
 
 def _resolve_features_cache_path() -> Path:
-    override = os.environ.get("BIRD_FEATURES_CACHE") or os.environ.get("BIRD_FEATURES_PATH")
+    override = os.environ.get("LASERBEAK_FEATURES_CACHE") or os.environ.get("LASERBEAK_FEATURES_PATH")
     if override and override.strip():
         return Path(override.strip()).expanduser().resolve()
-    return Path.home() / ".config" / "bird" / _DEFAULT_CACHE_FILENAME
+    return Path.home() / ".config" / "laserbeak" / _DEFAULT_CACHE_FILENAME
 
 
 def _read_overrides_from_file(cache_path: Path) -> dict | None:

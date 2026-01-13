@@ -66,7 +66,7 @@ def extract_article_text(result: dict | None) -> str | None:
             "article": article_result,
             "note_tweet": (result or {}).get("note_tweet", {}).get("note_tweet_results", {}).get("result"),
         }
-        print("[bird][debug][article] payload:", json.dumps(payload, indent=2))
+        print("[laserbeak][debug][article] payload:", json.dumps(payload, indent=2))
 
     title = first_text(article_result.get("title"), article.get("title"))
     body = first_text(

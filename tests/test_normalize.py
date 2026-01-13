@@ -1,4 +1,4 @@
-from bird.normalize import mentions_query_from_user_option, normalize_handle
+from laserbeak.normalize import mentions_query_from_user_option, normalize_handle
 
 
 def test_normalize_handle():
