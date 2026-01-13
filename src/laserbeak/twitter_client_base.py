@@ -9,8 +9,8 @@ import httpx
 
 from .runtime_query_ids import runtime_query_ids
 from .twitter_client_constants import QUERY_IDS, TARGET_QUERY_ID_OPERATIONS
-from .types import CurrentUserResult, TwitterClientOptions
 from .twitter_client_utils import normalize_quote_depth
+from .types import CurrentUserResult, TwitterClientOptions
 
 
 class TwitterClientBase:

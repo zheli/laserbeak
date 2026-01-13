@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-import os
 from typing import Literal
 
 StatusKind = Literal["ok", "warn", "err", "info", "hint"]

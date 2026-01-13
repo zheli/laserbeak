@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 import json
 import os
-from pathlib import Path
-
+from dataclasses import dataclass
 from importlib import resources
+from pathlib import Path
 
 from . import data
 
