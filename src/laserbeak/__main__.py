@@ -15,14 +15,14 @@ def main() -> None:
 
     command = get_command(app)
     if invocation["show_help"]:
-        command.main(args=["--help"], prog_name="bird")
+        command.main(args=["--help"], prog_name="laserbeak")
         return
 
     if invocation["argv"]:
-        command.main(args=invocation["argv"], prog_name="bird")
+        command.main(args=invocation["argv"], prog_name="laserbeak")
         return
 
-    command.main(args=normalized_args, prog_name="bird")
+    command.main(args=normalized_args, prog_name="laserbeak")
 
 
 if __name__ == "__main__":

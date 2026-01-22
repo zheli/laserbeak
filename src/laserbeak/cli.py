@@ -3,15 +3,15 @@ from __future__ import annotations
 import json
 import os
 import sys
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable, List
 
-import typer
 import click
+import typer
 from typer.main import get_command
 
-from .config import BirdConfig, load_config
+from .config import LaserbeakConfig, load_config
 from .cookies import resolve_credentials
 from .extract import extract_bookmark_folder_id, extract_list_id, extract_tweet_id
 from .normalize import mentions_query_from_user_option, normalize_handle
@@ -126,7 +126,7 @@ class MediaSpec:
 class CliContext:
     is_tty: bool
     output: object
-    config: BirdConfig
+    config: LaserbeakConfig
 
     def colors(self, *, color: str | None = None, bold: bool = False) -> Callable[[str], str]:
         def wrap(text: str) -> str:
@@ -277,9 +277,9 @@ def main(
     chrome_profile: str | None = typer.Option(None, "--chrome-profile", help="Chrome profile name for cookie extraction"),
     firefox_profile: str | None = typer.Option(None, "--firefox-profile", help="Firefox profile name for cookie extraction"),
     cookie_timeout: str | None = typer.Option(None, "--cookie-timeout", help="Cookie extraction timeout in milliseconds"),
-    cookie_source: List[str] = typer.Option(None, "--cookie-source", help="Cookie source for browser cookie extraction (repeatable)"),
-    media: List[str] = typer.Option(None, "--media", help="Attach media file (repeatable, up to 4 images or 1 video)"),
-    alt: List[str] = typer.Option(None, "--alt", help="Alt text for the corresponding --media (repeatable)"),
+    cookie_source: list[str] = typer.Option(None, "--cookie-source", help="Cookie source for browser cookie extraction (repeatable)"),
+    media: list[str] = typer.Option(None, "--media", help="Attach media file (repeatable, up to 4 images or 1 video)"),
+    alt: list[str] = typer.Option(None, "--alt", help="Alt text for the corresponding --media (repeatable)"),
     timeout: str | None = typer.Option(None, "--timeout", help="Request timeout in milliseconds"),
     quote_depth: str | None = typer.Option(None, "--quote-depth", help="Max quoted tweet depth (default: 1; 0 disables)"),
     plain: bool = typer.Option(False, "--plain", help="Plain output (stable, no emoji, no color)"),
@@ -662,7 +662,7 @@ def bookmarks_command(
 
 
 @app.command("unbookmark")
-def unbookmark_command(ctx: typer.Context, tweet_ids: List[str] = typer.Argument(...)) -> None:
+def unbookmark_command(ctx: typer.Context, tweet_ids: list[str] = typer.Argument(...)) -> None:
     context = _build_context(ctx)
     opts = ctx.obj["global_opts"]
     timeout_ms = context.resolve_timeout_from_options(opts.get("timeout"))
@@ -1041,7 +1041,7 @@ def query_ids_command(
             )
             return
         typer.echo(f"{context.p('warn')}No cached query IDs yet.")
-        typer.echo(f"{context.p('info')}Run: bird query-ids --fresh")
+        typer.echo(f"{context.p('info')}Run: laserbeak query-ids --fresh")
         typer.echo(f"features_path: {feature_snapshot.cachePath}")
         return
 

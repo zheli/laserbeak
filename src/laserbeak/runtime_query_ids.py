@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 import json
 import os
-from pathlib import Path
 import re
 import time
-from typing import Callable
+from collections.abc import Callable
+from dataclasses import dataclass
+from pathlib import Path
 
 import httpx
 
@@ -180,10 +180,10 @@ def _fetch_text(url: str) -> str:
 
 
 def _resolve_default_cache_path() -> Path:
-    override = os.environ.get("BIRD_QUERY_IDS_CACHE")
+    override = os.environ.get("LASERBEAK_QUERY_IDS_CACHE")
     if override and override.strip():
         return Path(override.strip()).expanduser().resolve()
-    return Path.home() / ".config" / "bird" / _DEFAULT_CACHE_FILENAME
+    return Path.home() / ".config" / "laserbeak" / _DEFAULT_CACHE_FILENAME
 
 
 def _parse_snapshot(raw: object) -> RuntimeQueryIdSnapshot | None:

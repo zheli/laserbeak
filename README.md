@@ -1,6 +1,6 @@
-# bird 🐦 — fast X CLI for tweeting, replying, and reading
+# laserbeak 🐦 — fast X CLI for tweeting, replying, and reading
 
-`bird` is a fast X CLI for tweeting, replying, and reading via X/Twitter GraphQL (cookie auth).
+`laserbeak` is a fast X CLI for tweeting, replying, and reading via X/Twitter GraphQL (cookie auth).
 
 ## Disclaimer
 
@@ -12,72 +12,72 @@ and anti-bot behavior at any time — **expect this to break without notice**.
 With `uv`:
 
 ```bash
-uv tool install bird
+uv tool install laserbeak
 ```
 
 From source:
 
 ```bash
 uv sync --dev
-uv run bird whoami
+uv run laserbeak whoami
 ```
 
 ## Quickstart
 
 ```bash
 # Show the logged-in account
-bird whoami
+laserbeak whoami
 
 # Discover command help
-bird help whoami
+laserbeak help whoami
 
 # Read a tweet (URL or ID)
-bird read https://x.com/user/status/1234567890123456789
-bird 1234567890123456789 --json
+laserbeak read https://x.com/user/status/1234567890123456789
+laserbeak 1234567890123456789 --json
 
 # Thread + replies
-bird thread https://x.com/user/status/1234567890123456789
-bird replies 1234567890123456789
+laserbeak thread https://x.com/user/status/1234567890123456789
+laserbeak replies 1234567890123456789
 
 # Search + mentions
-bird search "from:steipete" -n 5
-bird mentions -n 5
-bird mentions --user @steipete -n 5
+laserbeak search "from:steipete" -n 5
+laserbeak mentions -n 5
+laserbeak mentions --user @steipete -n 5
 
 # Bookmarks
-bird bookmarks -n 5
-bird bookmarks --folder-id 123456789123456789 -n 5 # https://x.com/i/bookmarks/<folder-id>
-bird bookmarks --all --json
-bird bookmarks --all --max-pages 2 --json
-bird unbookmark 1234567890123456789
-bird unbookmark https://x.com/user/status/1234567890123456789
+laserbeak bookmarks -n 5
+laserbeak bookmarks --folder-id 123456789123456789 -n 5 # https://x.com/i/bookmarks/<folder-id>
+laserbeak bookmarks --all --json
+laserbeak bookmarks --all --max-pages 2 --json
+laserbeak unbookmark 1234567890123456789
+laserbeak unbookmark https://x.com/user/status/1234567890123456789
 
 # Likes
-bird likes -n 5
+laserbeak likes -n 5
 
 # Lists
-bird list-timeline 1234567890 -n 20
-bird list-timeline https://x.com/i/lists/1234567890 --all --json
-bird list-timeline 1234567890 --max-pages 3 --json
+laserbeak list-timeline 1234567890 -n 20
+laserbeak list-timeline https://x.com/i/lists/1234567890 --all --json
+laserbeak list-timeline 1234567890 --max-pages 3 --json
 
 # Following (who you follow)
-bird following -n 20
-bird following --user 12345678 -n 10  # by user ID
+laserbeak following -n 20
+laserbeak following --user 12345678 -n 10  # by user ID
 
 # Followers (who follows you)
-bird followers -n 20
-bird followers --user 12345678 -n 10  # by user ID
+laserbeak followers -n 20
+laserbeak followers --user 12345678 -n 10  # by user ID
 
 # Refresh GraphQL query IDs cache (no rebuild)
-bird query-ids --fresh
+laserbeak query-ids --fresh
 ```
 
 ## Library
 
-`bird` can be used as a library (same GraphQL client as the CLI):
+`laserbeak` can be used as a library (same GraphQL client as the CLI):
 
 ```python
-from bird import TwitterClient, resolve_credentials
+from laserbeak import TwitterClient, resolve_credentials
 
 creds = resolve_credentials(cookie_source=["safari"])
 client = TwitterClient({"cookies": creds["cookies"]})
@@ -86,24 +86,24 @@ result = client.search("from:steipete", 50)
 
 ## Commands
 
-- `bird tweet "<text>"` — post a new tweet.
-- `bird reply <tweet-id-or-url> "<text>"` — reply to a tweet using its ID or URL.
-- `bird help [command]` — show help (or help for a subcommand).
-- `bird query-ids [--fresh] [--json]` — inspect or refresh cached GraphQL query IDs.
-- `bird read <tweet-id-or-url> [--json]` — fetch tweet content as text or JSON.
-- `bird <tweet-id-or-url> [--json]` — shorthand for `read` when only a URL or ID is provided.
-- `bird replies <tweet-id-or-url> [--json]` — list replies to a tweet.
-- `bird thread <tweet-id-or-url> [--json]` — show the full conversation thread.
-- `bird search "<query>" [-n count] [--json]` — search for tweets matching a query.
-- `bird mentions [-n count] [--user @handle] [--json]` — find tweets mentioning a user (defaults to the authenticated user).
-- `bird bookmarks [-n count] [--folder-id id] [--all] [--max-pages n] [--json]` — list your bookmarked tweets (or a specific bookmark folder); `--max-pages` requires `--all`.
-- `bird unbookmark <tweet-id-or-url...>` — remove one or more bookmarks by tweet ID or URL.
-- `bird likes [-n count] [--json]` — list your liked tweets.
-- `bird list-timeline <list-id-or-url> [-n count] [--all] [--max-pages n] [--cursor string] [--json]` — get tweets from a list timeline; `--max-pages` implies `--all`.
-- `bird following [--user <userId>] [-n count] [--json]` — list users that you (or another user) follow.
-- `bird followers [--user <userId>] [-n count] [--json]` — list users that follow you (or another user).
-- `bird whoami` — print which Twitter account your cookies belong to.
-- `bird check` — show which credentials are available and where they were sourced from.
+- `laserbeak tweet "<text>"` — post a new tweet.
+- `laserbeak reply <tweet-id-or-url> "<text>"` — reply to a tweet using its ID or URL.
+- `laserbeak help [command]` — show help (or help for a subcommand).
+- `laserbeak query-ids [--fresh] [--json]` — inspect or refresh cached GraphQL query IDs.
+- `laserbeak read <tweet-id-or-url> [--json]` — fetch tweet content as text or JSON.
+- `laserbeak <tweet-id-or-url> [--json]` — shorthand for `read` when only a URL or ID is provided.
+- `laserbeak replies <tweet-id-or-url> [--json]` — list replies to a tweet.
+- `laserbeak thread <tweet-id-or-url> [--json]` — show the full conversation thread.
+- `laserbeak search "<query>" [-n count] [--json]` — search for tweets matching a query.
+- `laserbeak mentions [-n count] [--user @handle] [--json]` — find tweets mentioning a user (defaults to the authenticated user).
+- `laserbeak bookmarks [-n count] [--folder-id id] [--all] [--max-pages n] [--json]` — list your bookmarked tweets (or a specific bookmark folder); `--max-pages` requires `--all`.
+- `laserbeak unbookmark <tweet-id-or-url...>` — remove one or more bookmarks by tweet ID or URL.
+- `laserbeak likes [-n count] [--json]` — list your liked tweets.
+- `laserbeak list-timeline <list-id-or-url> [-n count] [--all] [--max-pages n] [--cursor string] [--json]` — get tweets from a list timeline; `--max-pages` implies `--all`.
+- `laserbeak following [--user <userId>] [-n count] [--json]` — list users that you (or another user) follow.
+- `laserbeak followers [--user <userId>] [-n count] [--json]` — list users that follow you (or another user).
+- `laserbeak whoami` — print which Twitter account your cookies belong to.
+- `laserbeak check` — show which credentials are available and where they were sourced from.
 
 Global options:
 - `--auth-token <token>`: set the `auth_token` cookie manually.
@@ -127,9 +127,9 @@ X endpoints and authenticates via cookies (`auth_token`, `ct0`).
 
 Write operations:
 - `tweet`/`reply` primarily use GraphQL (`CreateTweet`).
-- If GraphQL returns error `226` (“automated request”), `bird` falls back to the legacy `statuses/update.json` endpoint.
+- If GraphQL returns error `226` (“automated request”), `laserbeak` falls back to the legacy `statuses/update.json` endpoint.
 
-`bird` resolves credentials in this order:
+`laserbeak` resolves credentials in this order:
 
 1. CLI flags: `--auth-token`, `--ct0`
 2. Environment variables: `AUTH_TOKEN`, `CT0` (fallback: `TWITTER_AUTH_TOKEN`, `TWITTER_CT0`)
@@ -139,10 +139,10 @@ Write operations:
 
 Config precedence: CLI flags > env vars > project config > global config.
 
-- Global: `~/.config/bird/config.json5`
-- Project: `./.birdrc.json5`
+- Global: `~/.config/laserbeak/config.json5`
+- Project: `./.laserbeakrc.json5`
 
-Example `~/.config/bird/config.json5`:
+Example `~/.config/laserbeak/config.json5`:
 
 ```json5
 {
